@@ -1,10 +1,28 @@
 - combien de personnes avec le même prenom sont nées en même temps que vous dans votre département
+SELECT * FROM `prenom` WHERE pre_prenom = 'FABRICE' and dep_code='42' and pre_annee='1969' 
+
 - Liste des prenoms nés en 2014
+SELECT * FROM `prenom` WHERE pre_annee='2014' GROUP BY gen_code, pre_prenom
+
 - liste des prenoms rares moins de 50 naissances par an
+SELECT *, SUM(pre_nombre) AS somme_naissance 
+FROM `prenom` 
+GROUP BY gen_code, pre_prenom, pre_annee
+HAVING somme_naissance < 50
+
 - liste des prenoms commencant par D et finissant N
+SELECT * FROM `prenom` WHERE pre_prenom LIKE 'D%N' GROUP BY pre_prenom
+
+
 - prenom avec le plus de naissances
+SELECT gen_code, pre_prenom, SUM(pre_nombre) somme_naissance FROM `prenom` GROUP BY gen_code, pre_prenom ORDER BY somme_naissance DESC 
+
 - prenom avec le moins de naissances
+SELECT *, SUM(pre_nombre) somme_naissance FROM `prenom` GROUP BY gen_code, pre_prenom ORDER BY somme_naissance
+
 - les 10 prenoms les plus utilisés avec au moins une naissance en lozere
+
+
 - le prenom le plus donné en 1900
 - date d'apparition de chaque prénom
 - prenom disparus (pas utilisé depuis 10 ans)
